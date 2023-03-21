@@ -6,10 +6,9 @@ import GoogleStorageProvider, {
 } from "./providers/google.js";
 
 export default function withCDN(
-  cdnConfig: GoogleProviderConfig,
-  config: NextConfig
-): NextConfig {
-  return {
+  cdnConfig: GoogleProviderConfig
+): (config: NextConfig) => NextConfig {
+  return (config) => ({
     ...config,
 
     // Note assetPrefix is only used in production since it's not needed in development
@@ -24,5 +23,5 @@ export default function withCDN(
       );
       return config;
     },
-  };
+  });
 }
