@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 
-import { NextJSCDNPlugin } from "./plugin";
+import { NextJSCDNPlugin } from "./plugin.js";
 
 type ProviderConfig = {
   cdn:

@@ -1,6 +1,6 @@
-import { webpack } from "next/dist/compiled/webpack/webpack";
+import { webpack } from "next/dist/compiled/webpack/webpack.js";
 import stream from "stream";
-import { StorageProvider } from "./providers/interface";
+import { StorageProvider } from "./providers/interface.js";
 
 class MyStorageProvider implements StorageProvider {
   write(file: string) {

@@ -1,7 +1,7 @@
 import { Storage, type Bucket } from "@google-cloud/storage";
 import type { Writable } from "stream";
 import { PassThrough } from "stream";
-import type { StorageProvider } from "./interface";
+import type { StorageProvider } from "./interface.js";
 
 class GoogleStorageProvider implements StorageProvider {
   bucket: Bucket;
