@@ -1,25 +1,24 @@
 import type { NextConfig } from "next";
 
 import { NextJSCDNPlugin } from "./plugin.js";
+import GoogleStorageProvider from "./providers/google.js";
 
 type ProviderConfig = {
   cdn:
     | {
         domain: string;
-
         provider: "google";
-
         bucket: string;
         keyFilename: string;
+        development?: boolean;
       }
     | {
         domain: string;
 
         provider: "aws";
+        development?: boolean;
       };
 };
-
-const isProd = process.env.NODE_ENV === "production";
 
 export default function withCDN(
   config: NextConfig & ProviderConfig
@@ -29,30 +28,18 @@ export default function withCDN(
 
     // Note assetPrefix is only used in production since it's not needed in development
     // and it's overwriten.
-    assetPrefix: isProd ? config.cdn.domain : undefined,
+    assetPrefix: config.cdn.development ? undefined : config.cdn.domain,
     webpack: (config, { dev }) => {
       config.plugins.push(
         new NextJSCDNPlugin({
           dev,
+          storage: new GoogleStorageProvider(
+            config.cdn.keyFilename,
+            config.cdn.bucket
+          ),
         })
       );
       return config;
     },
   };
 }
-
-// const test = withCDN({
-//   cdn: {
-//     domain: "https://cdn.justmagic.dev",
-//     provider: "google",
-//     bucket: "justmagic-bucket",
-//     keyFilename: "bucket-key.json",
-//   },
-
-//   output: "standalone",
-//   reactStrictMode: true,
-//   swcMinify: true,
-//   experimental: {
-//     appDir: true,
-//   },
-// });

@@ -6,9 +6,9 @@ import type { StorageProvider } from "./interface.js";
 class GoogleStorageProvider implements StorageProvider {
   bucket: Bucket;
 
-  constructor() {
-    const storage = new Storage({ keyFilename: "bucket-key.json" });
-    this.bucket = storage.bucket("justmagic-bucket");
+  constructor(keyFilename: string, bucket: string) {
+    const storage = new Storage({ keyFilename });
+    this.bucket = storage.bucket(bucket);
   }
 
   write(file: string): Writable {
