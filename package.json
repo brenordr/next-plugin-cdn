@@ -1,6 +1,6 @@
 {
   "name": "next-plugin-cdn",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "",
   "types": "lib/esm/index.d.ts",
   "main": "lib/cjs/index.js",

@@ -42,6 +42,11 @@ export class NextCDNPlugin {
       (file: string, { content }: any) => {
         return new Promise((resolve, reject) => {
           if (/static/g.test(file)) {
+            // This is a hack to fix the path of the file.
+            if (/\/static/g.test(file)) {
+              file = file.replace("/static", "static");
+            }
+
             storage.has(`_next/${file}`).then((exists) => {
               if (exists) {
                 // file already exits in storage. skip upload
