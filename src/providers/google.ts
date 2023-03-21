@@ -1,4 +1,5 @@
 import { Storage, type Bucket } from "@google-cloud/storage";
+import { GoogleAuthOptions } from "google-auth-library";
 import type { Writable } from "stream";
 import { PassThrough } from "stream";
 import type { StorageProvider } from "./interface.js";
@@ -6,18 +7,13 @@ import type { StorageProvider } from "./interface.js";
 export type GoogleProviderConfig = {
   domain: string;
   bucket: string;
-  keyFilename: string;
-  projectId?: string;
-};
+} & Omit<GoogleAuthOptions, "authClient">;
 
 class GoogleStorageProvider implements StorageProvider {
   bucket: Bucket;
 
   constructor(config: GoogleProviderConfig) {
-    const storage = new Storage({
-      projectId: config.projectId,
-      keyFilename: config.keyFilename,
-    });
+    const storage = new Storage(config);
     this.bucket = storage.bucket(config.bucket);
   }
 
