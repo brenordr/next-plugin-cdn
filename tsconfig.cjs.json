@@ -2,7 +2,7 @@
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"],
   "compilerOptions": {
-    "outDir": "lib/esm",
+    "outDir": "lib/cjs",
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
@@ -13,8 +13,9 @@
     "declaration": true,
 
     "lib": ["es2019", "es2020.promise", "es2020.bigint", "es2020.string"],
-    "module": "NodeNext",
-    "target": "ES2015",
+    "module": "CommonJS",
+    "moduleResolution": "nodenext",
+    "target": "ES5",
 
     "strict": true,
     "esModuleInterop": true,

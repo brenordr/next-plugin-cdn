@@ -1,13 +1,22 @@
 {
   "name": "next-plugin-cdn",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "type": "module",
+  "types": "lib/esm/index.d.ts",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "exports": {
+    ".": {
+      "import": "./lib/esm/index.js",
+      "require": "./lib/cjs/index.js"
+    }
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc -p ./"
+    "build::cjs": "tsc -p ./tsconfig.cjs.json",
+    "build::esm": "tsc -p ./tsconfig.json",
+    "build": "pnpm run build::cjs && pnpm run build::esm",
+    "prepublish": "pnpm run build"
   },
   "keywords": [],
   "author": "",
