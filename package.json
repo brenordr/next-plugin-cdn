@@ -1,15 +1,13 @@
 {
   "name": "next-plugin-cdn",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "",
   "types": "lib/esm/index.d.ts",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
   "exports": {
-    ".": {
-      "import": "./lib/esm/index.js",
-      "require": "./lib/cjs/index.js"
-    }
+    "import": "./lib/esm/index.js",
+    "require": "./lib/cjs/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -25,10 +23,12 @@
     "@types/node": "^18.15.3",
     "next": "^13.2.4",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.2"
+    "typescript": "^5.0.2",
+    "webpack": "^5.76.2"
   },
   "dependencies": {
     "@google-cloud/storage": "^6.9.4",
+    "@types/webpack": "^5.28.0",
     "google-auth-library": "^8.7.0"
   }
 }

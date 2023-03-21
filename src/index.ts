@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 
-import { NextJSCDNPlugin } from "./plugin.js";
+import { NextCDNPlugin } from "./plugin.js";
 import GoogleStorageProvider, {
   GoogleProviderConfig,
 } from "./providers/google.js";
@@ -16,7 +16,7 @@ export default function withCDN(
     assetPrefix: cdnConfig.domain,
     webpack: (config, { dev }) => {
       config.plugins.push(
-        new NextJSCDNPlugin({
+        new NextCDNPlugin({
           dev,
           storage: new GoogleStorageProvider(cdnConfig),
         })

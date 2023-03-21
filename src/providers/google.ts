@@ -1,7 +1,6 @@
 import { Storage, type Bucket } from "@google-cloud/storage";
 import { GoogleAuthOptions } from "google-auth-library";
 import type { Writable } from "stream";
-import { PassThrough } from "stream";
 import type { StorageProvider } from "./interface.js";
 
 export type GoogleProviderConfig = {
@@ -18,16 +17,8 @@ class GoogleStorageProvider implements StorageProvider {
   }
 
   write(file: string): Writable {
-    // console.info(`publishing file: ${file}`);
-
     const fileRef = this.bucket.file(file);
-    const passthroughStream = new PassThrough();
-    passthroughStream.pipe(fileRef.createWriteStream()).on("finish", () => {
-      console.info(`file: ${file} uploaded to bucket.`);
-      // The file upload is complete
-    });
-
-    return passthroughStream;
+    return fileRef.createWriteStream();
   }
 
   async has(file: string): Promise<boolean> {
