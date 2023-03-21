@@ -3,9 +3,11 @@ import stream from "stream";
 import { StorageProvider } from "./providers/interface.js";
 
 class MyStorageProvider implements StorageProvider {
+  // This is a dummy provider. It does nothing.
+  // You can use this as a template to create your own provider.
   write(file: string) {
+    console.error("Method not implemented. This is a dummy provider.");
     return new stream.Writable();
-    // throw new Error("Method not implemented.");
   }
   async has(file: string): Promise<boolean> {
     return true;
@@ -30,8 +32,6 @@ export class NextJSCDNPlugin {
       storage: new MyStorageProvider(), // default provider
       ...options,
     };
-
-    console.log("NextJSCDNPlugin constructor");
   }
 
   apply(compiler: webpack.Compiler) {

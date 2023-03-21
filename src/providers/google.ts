@@ -3,18 +3,31 @@ import type { Writable } from "stream";
 import { PassThrough } from "stream";
 import type { StorageProvider } from "./interface.js";
 
+export type GoogleProviderConfig = {
+  domain: string;
+  bucket: string;
+  keyFilename: string;
+  projectId?: string;
+};
+
 class GoogleStorageProvider implements StorageProvider {
   bucket: Bucket;
 
-  constructor(keyFilename: string, bucket: string) {
-    const storage = new Storage({ keyFilename });
-    this.bucket = storage.bucket(bucket);
+  constructor(config: GoogleProviderConfig) {
+    const storage = new Storage({
+      projectId: config.projectId,
+      keyFilename: config.keyFilename,
+    });
+    this.bucket = storage.bucket(config.bucket);
   }
 
   write(file: string): Writable {
-    const fileRef = this.bucket.file(`_next/${file}`);
+    // console.info(`publishing file: ${file}`);
+
+    const fileRef = this.bucket.file(file);
     const passthroughStream = new PassThrough();
     passthroughStream.pipe(fileRef.createWriteStream()).on("finish", () => {
+      console.info(`file: ${file} uploaded to bucket.`);
       // The file upload is complete
     });
 
@@ -22,8 +35,8 @@ class GoogleStorageProvider implements StorageProvider {
   }
 
   async has(file: string): Promise<boolean> {
-    const data = await this.bucket.file(`_next/${file}`).exists();
-    return data[0];
+    const exists = (await this.bucket.file(file).exists())[0];
+    return exists;
   }
 }
 
