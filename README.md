@@ -54,10 +54,10 @@ Now, during the build process, the plugin will upload your static assets to the 
 ## ⚙️ Options
 The withCDN function accepts an object with the following properties:
 
-`domain`: The domain of your CDN. This should be set to the value of the CDN_DOMAIN environment variable.
-`provider`: The CDN provider you are using (e.g., google, aws, cloudflare, etc.). This should be set to the value of the CDN_PROVIDER environment variable.
-`bucket`: The name of the bucket where your assets will be uploaded. This should be set to the value of the CDN_BUCKET environment variable.
-`keyFilename`: The name of the JSON key file used for authentication with the CDN provider. This should be set to the value of the CDN_KEY_FILENAME environment variable.
+- `domain`: The domain of your CDN. This should be set to the value of the CDN_DOMAIN environment variable.
+- `provider`: The CDN provider you are using (e.g., google, aws, cloudflare, etc.). This should be set to the value of the CDN_PROVIDER environment variable.
+- `bucket`: The name of the bucket where your assets will be uploaded. This should be set to the value of the CDN_BUCKET environment variable.
+- `keyFilename`: The name of the JSON key file used for authentication with the CDN provider. This should be set to the value of the CDN_KEY_FILENAME environment variable.
 
 These options are passed to the plugin, which then takes care of uploading the assets and configuring the CDN prefix. 🛠️
 
