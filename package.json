@@ -16,6 +16,10 @@
     "build": "pnpm run build::cjs && pnpm run build::esm",
     "prepublish": "pnpm run build"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brenordr/next-plugin-cdn"
+  },
   "keywords": [],
   "author": "",
   "license": "MIT",
